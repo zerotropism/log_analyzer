@@ -68,6 +68,7 @@ python main.py --input input/server_activity.log --large-file
 
 ## Structure du projet
 
+```
 log_analyzer/
 ├── main.py               # Point d'entrée CLI
 ├── log_loader.py         # Chargement du fichier (mode DataFrame ou streaming)
@@ -77,6 +78,7 @@ log_analyzer/
 ├── report.py             # Génération du rapport JSON
 ├── input/                # Fichiers de logs d'exemple
 └── tests/                # Tests unitaires (pytest)
+```
 
 ## Tests
 
