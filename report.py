@@ -13,6 +13,8 @@ def generate_report(df: pd.DataFrame, malformed_count: int = 0) -> dict:
 
     Args:
         df (pd.DataFrame): The DataFrame containing log data.
+        malformed_count (int): The number of malformed log entries.
+
     Returns:
         dict: A dictionary containing the report sections.
     """
@@ -40,6 +42,14 @@ def generate_report(df: pd.DataFrame, malformed_count: int = 0) -> dict:
 
 
 def generate_report_from_entries(entries: Iterable[LogEntry | None]) -> dict:
+    """
+    Generates a report from an iterable of LogEntry objects.
+
+    Args:
+        entries (Iterable[LogEntry | None]): An iterable of LogEntry objects or None for malformed lines.
+    Returns:
+        dict: A dictionary containing the report sections.
+    """
     malformed_count = 0
     total = 0
     users = set()

@@ -33,6 +33,13 @@ def load_data(path: str) -> tuple[pd.DataFrame, list[str]]:
 
 
 def stream_entries(path: str) -> Generator[LogEntry | None, None, None]:
+    """Stream log entries from a file.
+
+    Args:
+        path (str): The path to the log file.
+    Yields:
+        Generator[LogEntry | None, None, None]: Parsed log entries, or None for malformed lines.
+    """
     with open(path, "r") as f:
         for line in f:
             line = line.strip()
