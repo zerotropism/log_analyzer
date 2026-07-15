@@ -42,6 +42,17 @@ def detect_bursts(df, window=300, threshold=5):
 def detect_bursts_from_timestamps(
     error_timestamps: dict[tuple, list], window: int = 300, threshold: int = 5
 ) -> list[dict]:
+    """
+    Detects bursts of errors from a dictionary of error timestamps.
+
+    Args:
+        error_timestamps (dict[tuple, list]): A dictionary where keys are (ip, user) pairs and values are lists of error timestamps.
+        window (int): The time window in seconds to consider for bursts.
+        threshold (int): The number of errors that constitutes a burst.
+
+    Returns:
+        list[dict]: A list of dictionaries containing suspicious (ip, user) pairs with bursts of errors.
+    """
     suspicious = []
 
     for (ip, user), timestamps in error_timestamps.items():
@@ -62,6 +73,6 @@ def detect_bursts_from_timestamps(
                         "time_range": (str(parsed[0]), str(parsed[-1])),
                     }
                 )
-                break  # burst détecté, inutile de continuer pour ce pair
+                break  # detected burst, no need to continue for this pair
 
     return suspicious

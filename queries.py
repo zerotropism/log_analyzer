@@ -7,7 +7,6 @@ def successful_logins_per_user(df) -> dict:
 
     Args:
         df (pd.DataFrame): The DataFrame containing log data.
-
     Returns:
         dict: A dictionary with users as keys and their successful login counts as values.
     """
@@ -21,7 +20,6 @@ def ips_per_user(df) -> dict:
 
     Args:
         df (pd.DataFrame): The DataFrame containing log data.
-
     Returns:
         dict: A dictionary with users as keys and a list of their unique IP addresses as values.
     """
