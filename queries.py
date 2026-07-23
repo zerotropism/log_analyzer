@@ -10,6 +10,7 @@ def successful_logins_per_user(df) -> dict:
     Returns:
         dict: A dictionary with users as keys and their successful login counts as values.
     """
+    # A successful login is an INFO-level LOGIN; failed attempts are logged at ERROR/WARNING
     successful_logins = df[(df["action"] == "LOGIN") & (df["level"] == "INFO")]
     return successful_logins["user"].value_counts().to_dict()
 

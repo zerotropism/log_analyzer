@@ -26,6 +26,7 @@ def main():
         df, malformed = load_data(args.input)
         report = generate_report(df, malformed_count=len(malformed))
 
+    # time_range carries datetime/Timestamp objects that json can't serialize on its own
     output = json.dumps(report, indent=2, default=str)
 
     if args.output:
