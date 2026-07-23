@@ -28,12 +28,14 @@ def load_data(path: str) -> tuple[pd.DataFrame, list[str]]:
                 malformed.append(line)
 
     df = pd.DataFrame([vars(e) for e in rows])
+    # Parse timestamps upfront so later datetime subtractions in detect_bursts work
     df["timestamp"] = pd.to_datetime(df["timestamp"])
     return df, malformed
 
 
 def stream_entries(path: str) -> Generator[LogEntry | None, None, None]:
-    """Stream log entries from a file.
+    """Generator variant of load_data:
+    never builds a full DataFrame, so >32 GB files fit in memory
 
     Args:
         path (str): The path to the log file.

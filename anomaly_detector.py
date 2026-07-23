@@ -29,8 +29,12 @@ def detect_bursts(df, window=300, threshold=5):
 
         for t in times:
             window_q.append(t)
+            # Sliding window: drop errors older than `window` seconds so the deque only
+            # holds the current interval
             while (t - window_q[0]).total_seconds() > window:
                 window_q.popleft()
+            # Strictly greater: spec flags "more than" threshold errors
+            # (6+ with the default of 5)
             if len(window_q) > threshold:
                 return True
         return False
@@ -43,6 +47,7 @@ def detect_bursts_from_timestamps(
     error_timestamps: dict[tuple, list], window: int = 300, threshold: int = 5
 ) -> list[dict]:
     """
+    Streaming alternative to detect_bursts: runs on accumulated timestamps, no DataFrame available
     Detects bursts of errors from a dictionary of error timestamps.
 
     Args:

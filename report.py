@@ -43,6 +43,7 @@ def generate_report(df: pd.DataFrame, malformed_count: int = 0) -> dict:
 
 def generate_report_from_entries(entries: Iterable[LogEntry | None]) -> dict:
     """
+    Streaming alternative to generate_report: aggregates on the fly instead of via a DataFrame.
     Generates a report from an iterable of LogEntry objects.
 
     Args:
