@@ -1,45 +1,53 @@
 # Log Analyzer
 
-Outil d'analyse de sécurité des logs en Python. Il analyse des fichiers de logs serveur pour détecter les comportements suspects, extraire des statistiques d'utilisation et générer des rapports JSON.
+A Python security log analysis tool. It parses server log files to detect suspicious behavior, extract usage statistics, and generate JSON reports.
 
-## Fonctionnalités
+## Features
 
-- **Parsing des logs** : lecture et validation du format `[TIMESTAMP] [LEVEL] [IP] [USER] ACTION: message`
-- **Détection d'anomalies** : identification des sources (IP/utilisateur) générant plus de 5 erreurs en moins de 5 minutes
-- **Requêtes** :
-  - Nombre de connexions réussies par utilisateur
-  - Liste des adresses IP par utilisateur
-- **Rapport JSON** : résumé global + activités suspectes + statistiques de connexion
-- **Mode streaming** : traitement ligne par ligne pour les fichiers volumineux (> 32 Go)
-- **Robustesse** : les lignes mal formatées sont comptabilisées sans interrompre l'analyse
+- **Log parsing**: reads and validates the format `[TIMESTAMP] [LEVEL] [IP] [USER] ACTION: message`
+- **Anomaly detection**: identifies sources (IP/user) generating more than 5 errors within a 5-minute window
+- **Queries**:
+  - Number of successful logins per user
+  - List of IP addresses per user
+- **JSON report**: global summary + suspicious activity + login statistics
+- **Streaming mode**: line-by-line processing for large files (> 32 GB)
+- **Robustness**: malformed lines are counted without interrupting the analysis
 
-## Format de log attendu
+## Expected Log Format
 
-- `[2024-01-15 10:23:45] [INFO] [192.168.1.100] [john_doe] LOGIN: Successful login attempt`
-- `[2024-01-15 10:23:47] [ERROR] [192.168.1.101] [jane_smith] ACCESS: Invalid permission for /admin/users`
+```
+[2024-01-15 10:23:45] [INFO] [192.168.1.100] [john_doe] LOGIN: Successful login attempt
+[2024-01-15 10:23:47] [ERROR] [192.168.1.101] [jane_smith] ACCESS: Invalid permission for /admin/users
+```
 
 ## Installation
 
-Nécessite Python 3.12+.
+Requires Python 3.12+.
+
+```bash
+pip install -e .
+```
+
+Or with [uv](https://docs.astral.sh/uv/):
 
 ```bash
 uv sync
 ```
 
-## Utilisation
+## Usage
 
-```Python
-# Analyse standard
+```bash
+# Standard analysis
 python main.py --input input/server_activity.log
 
-# Sauvegarde du rapport dans un fichier
-python main.py --input input/server_activity.log --output rapport.json
+# Save the report to a file
+python main.py --input input/server_activity.log --output report.json
 
-# Mode streaming pour les fichiers volumineux (> 32 Go)
+# Streaming mode for large files (> 32 GB)
 python main.py --input input/server_activity.log --large-file
 ```
 
-## Structure du rapport de sortie
+## Output Report Structure
 
 ```json
 {
@@ -66,18 +74,18 @@ python main.py --input input/server_activity.log --large-file
 }
 ```
 
-## Structure du projet
+## Project Structure
 
 ```
 log_analyzer/
-├── main.py               # Point d'entrée CLI
-├── log_loader.py         # Chargement du fichier (mode DataFrame ou streaming)
-├── log_parser.py         # Parsing des lignes de log
-├── anomaly_detector.py   # Détection des rafales d'erreurs
-├── queries.py            # Requêtes analytiques (connexions, IPs)
-├── report.py             # Génération du rapport JSON
-├── input/                # Fichiers de logs d'exemple
-└── tests/                # Tests unitaires (pytest)
+├── main.py               # CLI entry point
+├── log_loader.py         # File loading (DataFrame or streaming mode)
+├── log_parser.py         # Log line parsing
+├── anomaly_detector.py   # Error burst detection
+├── queries.py            # Analytical queries (logins, IPs)
+├── report.py             # JSON report generation
+├── input/                # Sample log files
+└── tests/                # Unit tests (pytest)
 ```
 
 ## Tests
@@ -85,3 +93,10 @@ log_analyzer/
 ```bash
 pytest
 ```
+
+## Dependencies
+
+| Package   | Role                            |
+|-----------|---------------------------------|
+| `pandas`  | Log data manipulation           |
+| `pytest`  | Unit testing                    |
