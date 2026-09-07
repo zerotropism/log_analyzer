@@ -38,13 +38,13 @@ uv sync
 
 ```bash
 # Standard analysis
-python main.py --input input/server_activity.log
+python main.py --input input/sample.log
 
 # Save the report to a file
-python main.py --input input/server_activity.log --output report.json
+python main.py --input input/sample.log --output report.json
 
 # Streaming mode for large files (> 32 GB)
-python main.py --input input/server_activity.log --large-file
+python main.py --input input/sample.log --large-file
 ```
 
 ## Output Report Structure
