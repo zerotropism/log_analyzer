@@ -224,3 +224,6 @@ __marimo__/
 .env
 *.db
 .venv/
+
+# sample log kept in repo as fixture
+!input/sample.log
