@@ -1,10 +1,11 @@
+from collections import defaultdict
+from collections.abc import Iterable
+
 import pandas as pd
 
-from typing import Iterable
-from log_parser import LogEntry
-from collections import defaultdict
-from queries import successful_logins_per_user, ips_per_user
 from anomaly_detector import detect_bursts, detect_bursts_from_timestamps
+from log_parser import LogEntry
+from queries import ips_per_user, successful_logins_per_user
 
 
 def generate_report(df: pd.DataFrame, malformed_count: int = 0) -> dict:
@@ -47,7 +48,8 @@ def generate_report_from_entries(entries: Iterable[LogEntry | None]) -> dict:
     Generates a report from an iterable of LogEntry objects.
 
     Args:
-        entries (Iterable[LogEntry | None]): An iterable of LogEntry objects or None for malformed lines.
+        entries (Iterable[LogEntry | None]): log entries, None for
+            malformed lines.
     Returns:
         dict: A dictionary containing the report sections.
     """

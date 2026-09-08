@@ -1,6 +1,7 @@
 import pandas as pd
 import pytest
-from queries import successful_logins_per_user, ips_per_user, filter_entries
+
+from queries import filter_entries, ips_per_user, successful_logins_per_user
 
 
 @pytest.fixture

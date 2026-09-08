@@ -1,7 +1,9 @@
+from collections.abc import Generator
+from pathlib import Path
+
 import pandas as pd
 
-from typing import Generator
-from log_parser import parse_line, LogEntry
+from log_parser import LogEntry, parse_line
 
 
 def load_data(path: str) -> tuple[pd.DataFrame, list[str]]:
@@ -16,7 +18,7 @@ def load_data(path: str) -> tuple[pd.DataFrame, list[str]]:
     rows = []
     malformed = []
 
-    with open(path, "r") as f:
+    with Path(path).open() as f:
         for line in f:
             line = line.strip()
             if not line:
@@ -42,7 +44,7 @@ def stream_entries(path: str) -> Generator[LogEntry | None, None, None]:
     Yields:
         Generator[LogEntry | None, None, None]: Parsed log entries, or None for malformed lines.
     """
-    with open(path, "r") as f:
+    with Path(path).open() as f:
         for line in f:
             line = line.strip()
             if not line:
