@@ -1,5 +1,5 @@
-from datetime import datetime
 from collections import deque
+from datetime import datetime
 
 
 def detect_bursts(df, window=300, threshold=5):
@@ -51,12 +51,13 @@ def detect_bursts_from_timestamps(
     Detects bursts of errors from a dictionary of error timestamps.
 
     Args:
-        error_timestamps (dict[tuple, list]): A dictionary where keys are (ip, user) pairs and values are lists of error timestamps.
+        error_timestamps (dict[tuple, list]): keys are (ip, user) pairs,
+        values are lists of error timestamps.
         window (int): The time window in seconds to consider for bursts.
         threshold (int): The number of errors that constitutes a burst.
 
     Returns:
-        list[dict]: A list of dictionaries containing suspicious (ip, user) pairs with bursts of errors.
+        list[dict]: suspicious (ip, user) pairs with bursts of errors.
     """
     suspicious = []
 

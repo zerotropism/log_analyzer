@@ -1,5 +1,6 @@
 import argparse
 import json
+from pathlib import Path
 
 from log_loader import load_data, stream_entries
 from report import generate_report, generate_report_from_entries
@@ -8,9 +9,7 @@ from report import generate_report, generate_report_from_entries
 def parse_args():
     parser = argparse.ArgumentParser(description="Analyse de sécurité des logs")
     parser.add_argument("--input", required=True, help="Chemin vers le fichier de logs")
-    parser.add_argument(
-        "--output", default=None, help="Fichier JSON de sortie (stdout par défaut)"
-    )
+    parser.add_argument("--output", default=None, help="Fichier JSON de sortie (stdout par défaut)")
     parser.add_argument(
         "--large-file", action="store_true", help="Mode streaming pour fichiers > 32 GB"
     )
@@ -30,7 +29,7 @@ def main():
     output = json.dumps(report, indent=2, default=str)
 
     if args.output:
-        with open(args.output, "w") as f:
+        with Path(args.output).open("w") as f:
             f.write(output)
     else:
         print(output)

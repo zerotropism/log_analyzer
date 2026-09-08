@@ -1,5 +1,6 @@
-from anomaly_detector import detect_bursts_from_timestamps
 from datetime import datetime, timedelta
+
+from anomaly_detector import detect_bursts_from_timestamps
 
 
 def make_timestamps(n, gap_seconds=30):

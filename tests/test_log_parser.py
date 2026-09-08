@@ -1,6 +1,6 @@
 import pytest
 
-from log_parser import parse_line, LogEntry
+from log_parser import LogEntry, parse_line
 
 VALID_LINE = "[2024-01-01 12:00:00] [ERROR] [192.168.1.1] [alice] LOGIN: failed attempt"
 
@@ -23,9 +23,7 @@ VALID_LINE = "[2024-01-01 12:00:00] [ERROR] [192.168.1.1] [alice] LOGIN: failed 
         ("garbage", None),
         (
             "[2024-01-01 12:00:00] [INFO] [10.0.0.1] [bob] LOGIN: success",
-            LogEntry(
-                "2024-01-01 12:00:00", "INFO", "10.0.0.1", "bob", "LOGIN", "success"
-            ),
+            LogEntry("2024-01-01 12:00:00", "INFO", "10.0.0.1", "bob", "LOGIN", "success"),
         ),
     ],
 )

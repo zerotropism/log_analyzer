@@ -1,5 +1,5 @@
-from report import generate_report_from_entries
 from log_parser import LogEntry
+from report import generate_report_from_entries
 
 
 def test_generate_report_from_entries_counts_malformed():
