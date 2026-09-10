@@ -3,9 +3,9 @@ from collections.abc import Iterable
 
 import pandas as pd
 
-from anomaly_detector import detect_bursts, detect_bursts_from_timestamps
-from log_parser import LogEntry
-from queries import ips_per_user, successful_logins_per_user
+from log_analyzer.anomaly_detector import detect_bursts, detect_bursts_from_timestamps
+from log_analyzer.models import LogEntry
+from log_analyzer.queries import ips_per_user, successful_logins_per_user
 
 
 def generate_report(df: pd.DataFrame, malformed_count: int = 0) -> dict:

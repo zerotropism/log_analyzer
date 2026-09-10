@@ -1,11 +1,11 @@
 from datetime import datetime, timedelta
 
-from anomaly_detector import detect_bursts_from_timestamps
+from log_analyzer.anomaly_detector import detect_bursts_from_timestamps
 
 
 def make_timestamps(n, gap_seconds=30):
     base = datetime(2024, 1, 1, 12, 0, 0)
-    return [str(base + timedelta(seconds=i * gap_seconds)) for i in range(n)]
+    return [base + timedelta(seconds=i * gap_seconds) for i in range(n)]
 
 
 def test_burst_detected_above_threshold():

@@ -1,9 +1,11 @@
 from collections.abc import Generator
+from dataclasses import asdict
 from pathlib import Path
 
 import pandas as pd
 
-from log_parser import LogEntry, parse_line
+from log_analyzer.models import LogEntry
+from log_analyzer.parser import parse_line
 
 
 def load_data(path: str) -> tuple[pd.DataFrame, list[str]]:
@@ -29,7 +31,7 @@ def load_data(path: str) -> tuple[pd.DataFrame, list[str]]:
             else:
                 malformed.append(line)
 
-    df = pd.DataFrame([vars(e) for e in rows])
+    df = pd.DataFrame([asdict(e) for e in rows])
     # Parse timestamps upfront so later datetime subtractions in detect_bursts work
     df["timestamp"] = pd.to_datetime(df["timestamp"])
     return df, malformed

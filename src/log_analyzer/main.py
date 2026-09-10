@@ -2,8 +2,8 @@ import argparse
 import json
 from pathlib import Path
 
-from log_loader import load_data, stream_entries
-from report import generate_report, generate_report_from_entries
+from log_analyzer.log_loader import load_data, stream_entries
+from log_analyzer.report import generate_report, generate_report_from_entries
 
 
 def parse_args():
