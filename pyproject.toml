@@ -19,4 +19,5 @@ build-backend = "hatchling.build"
 dev = [
     "pytest>=9.1.1",
     "ruff>=0.16.6",
+    "pydantic>=2.10",
 ]
