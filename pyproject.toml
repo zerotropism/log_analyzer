@@ -5,11 +5,12 @@ description = "connection logs analyzer in Python"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "pandas>=3.0.3",
+    "pydantic>=2.10",
 ]
 
 [project.scripts]
-log-analyzer = "log_analyzer.main:main"
+log-analyzer = "log_analyzer.cli:main"
+log-analyzer-gen = "log_analyzer.synthetic:main"
 
 [build-system]
 requires = ["hatchling"]
@@ -19,5 +20,4 @@ build-backend = "hatchling.build"
 dev = [
     "pytest>=9.1.1",
     "ruff>=0.16.6",
-    "pydantic>=2.10",
 ]

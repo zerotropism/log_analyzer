@@ -1,7 +1,5 @@
-from dataclasses import asdict
 from datetime import datetime, timedelta
 
-import pandas as pd
 import pytest
 
 from log_analyzer.models import LogEntry
@@ -21,10 +19,3 @@ def sample_entries():
         )
         for i in range(8)  # 8 erreurs en < 5min → burst
     ]
-
-
-@pytest.fixture
-def sample_df(sample_entries):
-    df = pd.DataFrame([asdict(e) for e in sample_entries])
-    df["timestamp"] = pd.to_datetime(df["timestamp"])
-    return df
